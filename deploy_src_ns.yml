@@ -1,27 +1,27 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: donation-app
+  name: web-app
 
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: donation-app
-  namespace: donation-app
+  name: web-app
+  namespace: web-app
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: donation-app
+      app: web-app
   template:
     metadata:
       labels:
-        app: donation-app
+        app: web-app
     spec:
       containers:
-      - name: donation-app
-        image: yourdockerhubusername/donation-app:v1
+      - name: web-app
+        image: vishalmolkere/app:v1
         ports:
         - containerPort: 8080
 
@@ -29,11 +29,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: donation-app-service
-  namespace: donation-app
+  name: web-app-service
+  namespace: web-app
 spec:
   selector:
-    app: donation-app
+    app: web-app
   ports:
   - port: 80
     targetPort: 8080
